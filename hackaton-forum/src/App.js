@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Forum = () => {
+const Filter = () => {
   const [posts, setPosts] = useState([
     { id: 1, title: 'Post 1', skills: ['Dev front'] },
     { id: 2, title: 'Post 2', skills: ['Dev back'] },
@@ -43,7 +43,7 @@ const Forum = () => {
         <h2>Posts</h2>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {filteredPosts.map(post => (
-            <li key={post.id} style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#fff', borderRadius: '5px' }}>
+            <li style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#fff', borderRadius: '5px' }}>
               {post.title} - Compétences: {post.skills.join(', ')}
             </li>
           ))}
@@ -53,4 +53,4 @@ const Forum = () => {
   );
 };
 
-export default Forum;
+export default Filter;
