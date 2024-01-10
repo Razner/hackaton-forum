@@ -1,24 +1,43 @@
 import React, { useState } from 'react';
 
-const Filter = () => {
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'Post 1', skills: ['Dev front'] },
-    { id: 2, title: 'Post 2', skills: ['Dev back'] },
-    { id: 3, title: 'Post 3', skills: ['Dev fullstack'] },
-    { id: 4, title: 'Post 4', skills: ['Cyber'] },
-    { id: 5, title: 'Post 5', skills: ['Infra'] },
-    { id: 6, title: 'Post 6', skills: ['Réseau'] },
-  ]);
-
+const Forum = () => {
+  const [posts, setPosts] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState('All');
+  const [newPostDescription, setNewPostDescription] = useState('');
+  const [newPostSkills, setNewPostSkills] = useState('');
 
   const handleSkillChange = (skill) => {
     setSelectedSkill(skill);
   };
 
+  const handleNewPostDescriptionChange = (e) => {
+    setNewPostDescription(e.target.value);
+  };
+
+  const handleNewPostSkillsChange = (e) => {
+    setNewPostSkills(e.target.value);
+  };
+
+  const handleAddPost = () => {
+    if (newPostDescription && newPostSkills) {
+      const newPost = {
+        id: posts.length + 1,
+        description: newPostDescription,
+        skills: newPostSkills.split(',').map(skill => skill.trim()),
+      };
+  
+      setPosts([...posts, newPost]);
+      setNewPostDescription('');
+      setNewPostSkills('');
+    }
+  };
+
   const filteredPosts = selectedSkill === 'All'
-    ? posts
-    : posts.filter(post => post.skills.includes(selectedSkill));
+  ? posts
+  : posts.filter(post =>
+      (post.skills || []).some(skill => skill && skill.toLowerCase().includes(selectedSkill.toLowerCase())) ||
+      (post.description && post.description.toLowerCase().includes(selectedSkill.toLowerCase()))
+  );
 
   return (
     <div style={{ backgroundColor: '#23b2a4', padding: '20px', height: '100vh' }}>
@@ -40,11 +59,24 @@ const Filter = () => {
       </div>
 
       <div>
+        <h2>Créer un nouveau post</h2>
+        <div>
+          <label>Description:</label>
+          <input type="text" value={newPostDescription} onChange={handleNewPostDescriptionChange} />
+        </div>
+        <div>
+          <label>Compétences (séparées par des virgules):</label>
+          <input type="text" value={newPostSkills} onChange={handleNewPostSkillsChange} />
+        </div>
+        <button onClick={handleAddPost}>Ajouter Post</button>
+      </div>
+
+      <div>
         <h2>Posts</h2>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {filteredPosts.map(post => (
-            <li style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#fff', borderRadius: '5px' }}>
-              {post.title} - Compétences: {post.skills.join(', ')}
+            <li key={post.id} style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#fff', borderRadius: '5px' }}>
+              {post.description} - Compétences: {post.skills.join(', ')}
             </li>
           ))}
         </ul>
@@ -53,4 +85,4 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default Forum;
