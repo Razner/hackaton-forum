@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
+import './Forum.css'; // Assurez-vous de créer un fichier Forum.css pour stocker les styles
 
 const Forum = () => {
   const [posts, setPosts] = useState([]);
   const [selectedSkill, setSelectedSkill] = useState('All');
   const [newPostDescription, setNewPostDescription] = useState('');
-  const [newPostSkills, setNewPostSkills] = useState('');
+  const [selectedSkills, setSelectedSkills] = useState([]);
+
+  const skillsList = [
+    'Dev Frontend',
+    'Dev Backend',
+    'Dev Fullstack',
+    'Cybersécurité',
+    'Infrastructure',
+    'Réseau',
+  ];
 
   const handleSkillChange = (skill) => {
     setSelectedSkill(skill);
@@ -14,69 +24,82 @@ const Forum = () => {
     setNewPostDescription(e.target.value);
   };
 
-  const handleNewPostSkillsChange = (e) => {
-    setNewPostSkills(e.target.value);
+  const handleSkillButtonClick = (skill) => {
+    if (selectedSkills.includes(skill)) {
+      setSelectedSkills(selectedSkills.filter(selectedSkill => selectedSkill !== skill));
+    } else {
+      setSelectedSkills([...selectedSkills, skill]);
+    }
   };
 
   const handleAddPost = () => {
-    if (newPostDescription && newPostSkills) {
+    if (newPostDescription && selectedSkills.length > 0) {
       const newPost = {
         id: posts.length + 1,
         description: newPostDescription,
-        skills: newPostSkills.split(',').map(skill => skill.trim()),
+        skills: selectedSkills,
       };
-  
+
       setPosts([...posts, newPost]);
       setNewPostDescription('');
-      setNewPostSkills('');
+      setSelectedSkills([]);
     }
   };
 
   const filteredPosts = selectedSkill === 'All'
-  ? posts
-  : posts.filter(post =>
-      (post.skills || []).some(skill => skill && skill.toLowerCase().includes(selectedSkill.toLowerCase())) ||
+    ? posts
+    : posts.filter(post =>
+      post.skills.some(skill => skill.toLowerCase().includes(selectedSkill.toLowerCase())) ||
       (post.description && post.description.toLowerCase().includes(selectedSkill.toLowerCase()))
-  );
+    );
 
   return (
-    <div style={{ backgroundColor: '#23b2a4', padding: '20px', height: '100vh' }}>
-      <div>
+    <div className="forum-container">
+      <div className="filter-section">
         <label>Filtrer par compétence:</label>
         <select
           onChange={(e) => handleSkillChange(e.target.value)}
           value={selectedSkill}
-          style={{ margin: '10px', padding: '5px', borderRadius: '5px' }}
         >
           <option value="All">Toutes les compétences</option>
-          <option value="Dev front">Dev Frontend</option>
-          <option value="Dev back">Dev Backend</option>
-          <option value="Dev fullstack">Dev Fullstack</option>
-          <option value="Cyber">Cybersécurité</option>
-          <option value="Infra">Infrastructure</option>
-          <option value="Réseau">Réseau</option>
+          {skillsList.map(skill => (
+            <option key={skill} value={skill}>{skill}</option>
+          ))}
         </select>
       </div>
 
-      <div>
+      <div className="create-post-section">
         <h2>Créer un nouveau post</h2>
         <div>
           <label>Description:</label>
           <input type="text" value={newPostDescription} onChange={handleNewPostDescriptionChange} />
         </div>
         <div>
-          <label>Compétences (séparées par des virgules):</label>
-          <input type="text" value={newPostSkills} onChange={handleNewPostSkillsChange} />
+          <label>Compétences:</label>
+          <div className="skills-buttons">
+            {skillsList.map(skill => (
+              <button
+                key={skill}
+                onClick={() => handleSkillButtonClick(skill)}
+                className={selectedSkills.includes(skill) ? 'selected' : ''}
+              >
+                {skill}
+              </button>
+            ))}
+          </div>
         </div>
         <button onClick={handleAddPost}>Ajouter Post</button>
       </div>
 
-      <div>
-        <h2>Posts</h2>
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+      <div className="posts-section">
+        <h2>Tous les posts</h2>
+        <ul>
           {filteredPosts.map(post => (
-            <li key={post.id} style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#fff', borderRadius: '5px' }}>
-              {post.description} - Compétences: {post.skills.join(', ')}
+            <li key={post.id}>
+              <div className="post-item">
+                <div className="post-description">{post.description}</div>
+                <div className="post-skills">Compétences: {post.skills.join(', ')}</div>
+              </div>
             </li>
           ))}
         </ul>
