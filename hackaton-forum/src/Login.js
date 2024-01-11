@@ -29,15 +29,17 @@ const Login = () => {
   };  
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className={'forum-container'}>
+      <h1>Hackaton Forum</h1>
       <label>Email:</label>
       <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
 
-      <label>Password:</label>
+      <label>Mot de passe:</label>
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-
-      <button onClick={handleLogin}>Login</button>
+    <div className={'login'}>
+      <button onClick={handleLogin}>Se connecter</button>
+    </div>
+      
 
       {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
     </div>

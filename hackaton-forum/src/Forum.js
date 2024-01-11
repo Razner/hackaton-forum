@@ -55,8 +55,9 @@ const Forum = () => {
 
   return (
     <div className="forum-container">
+        <h1>Hackaton Forum</h1>
       <div className="filter-section">
-        <label>Filtrer par compétence:</label>
+        <label>Filtrer par compétence :</label>
         <select
           onChange={(e) => handleSkillChange(e.target.value)}
           value={selectedSkill}
@@ -71,24 +72,26 @@ const Forum = () => {
       <div className="create-post-section">
         <h2>Créer un nouveau post</h2>
         <div>
-          <label>Description:</label>
+          <label>Description :</label>
           <input type="text" value={newPostDescription} onChange={handleNewPostDescriptionChange} />
         </div>
         <div>
-          <label>Compétences:</label>
+          <label>Compétences :</label>
           <div className="skills-buttons">
             {skillsList.map(skill => (
               <button
                 key={skill}
                 onClick={() => handleSkillButtonClick(skill)}
-                className={selectedSkills.includes(skill) ? 'selected' : ''}
+                className={selectedSkills.includes(skill) ? 'clicked' : ''}
               >
                 {skill}
               </button>
             ))}
           </div>
         </div>
+        <div className={'addPost'}>
         <button onClick={handleAddPost}>Ajouter Post</button>
+        </div>
       </div>
 
       <div className="posts-section">
@@ -97,8 +100,8 @@ const Forum = () => {
           {filteredPosts.map(post => (
             <li key={post.id}>
               <div className="post-item">
-                <div className="post-description">{post.description}</div>
-                <div className="post-skills">Compétences: {post.skills.join(', ')}</div>
+                <div className="post-description">Description : {post.description}</div>
+                <div className="post-skills">Compétences : {post.skills.join(', ')}</div>
               </div>
             </li>
           ))}
