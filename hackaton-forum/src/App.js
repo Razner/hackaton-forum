@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Forum = () => {
   const [posts, setPosts] = useState([]);
@@ -81,6 +82,23 @@ const Forum = () => {
           ))}
         </ul>
       </div>
+      <div style={{ backgroundColor: '#23b2a4', padding: '20px', height: '100vh' }}>
+      {/* ... (votre code existant) */}
+
+      <div>
+        <h2>Posts</h2>
+        <ul style={{ listStyle: 'none', padding: 0 }}>
+          {/* ... (votre code existant) */}
+        </ul>
+      </div>
+
+      {/* Bouton "Register" qui mène à la page d'inscription */}
+      <div>
+        <Link to="/app/register">
+          <button>Register</button>
+        </Link>
+      </div>
+    </div>
     </div>
   );
 };
