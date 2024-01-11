@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
-import './Forum.css'; // Assurez-vous de créer un fichier Forum.css pour stocker les styles
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import axios from 'axios';
+import Login from './Login.js';
+import Forum from './Forum.js';
 
-const Forum = () => {
-  const [posts, setPosts] = useState([]);
-  const [selectedSkill, setSelectedSkill] = useState('All');
-  const [newPostDescription, setNewPostDescription] = useState('');
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/forum" element={<Forum />} />
+        <Route path="/" element={<Register />} />
+      </Routes>
+    </Router>
+  );
+};
+
+const Register = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
+  const [registered, setRegistered] = useState(false);
 
-  const skillsList = [
-    'Dev Frontend',
-    'Dev Backend',
-    'Dev Fullstack',
-    'Cybersécurité',
-    'Infrastructure',
-    'Réseau',
-  ];
-
-  const handleSkillChange = (skill) => {
-    setSelectedSkill(skill);
-  };
-
-  const handleNewPostDescriptionChange = (e) => {
-    setNewPostDescription(e.target.value);
-  };
+  const skillsList = ['Dev Frontend', 'Dev Backend', 'Dev Fullstack', 'Cyber', 'Infra', 'Réseau'];
 
   const handleSkillButtonClick = (skill) => {
     if (selectedSkills.includes(skill)) {
@@ -32,80 +32,48 @@ const Forum = () => {
     }
   };
 
-  const handleAddPost = () => {
-    if (newPostDescription && selectedSkills.length > 0) {
-      const newPost = {
-        id: posts.length + 1,
-        description: newPostDescription,
+  const handleRegister = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/register', {
+        email,
+        password,
         skills: selectedSkills,
-      };
+      });
 
-      setPosts([...posts, newPost]);
-      setNewPostDescription('');
-      setSelectedSkills([]);
+      console.log(response.data);
+      setRegistered(true);
+    } catch (error) {
+      console.error('Error during registration:', error);
     }
   };
 
-  const filteredPosts = selectedSkill === 'All'
-    ? posts
-    : posts.filter(post =>
-      post.skills.some(skill => skill.toLowerCase().includes(selectedSkill.toLowerCase())) ||
-      (post.description && post.description.toLowerCase().includes(selectedSkill.toLowerCase()))
-    );
-
   return (
-    <div className="forum-container">
-      <div className="filter-section">
-        <label>Filtrer par compétence:</label>
-        <select
-          onChange={(e) => handleSkillChange(e.target.value)}
-          value={selectedSkill}
-        >
-          <option value="All">Toutes les compétences</option>
-          {skillsList.map(skill => (
-            <option key={skill} value={skill}>{skill}</option>
-          ))}
-        </select>
+    <div>
+      <h1>Register</h1>
+      <label>Email:</label>
+      <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+
+      <label>Password:</label>
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+
+      <div>
+        <label>Skills:</label>
+        {skillsList.map(skill => (
+          <button
+            key={skill}
+            onClick={() => handleSkillButtonClick(skill)}
+            style={{ margin: '5px', padding: '5px', borderRadius: '5px', backgroundColor: selectedSkills.includes(skill) ? '#fff' : '#ccc' }}
+          >
+            {skill}
+          </button>
+        ))}
       </div>
 
-      <div className="create-post-section">
-        <h2>Créer un nouveau post</h2>
-        <div>
-          <label>Description:</label>
-          <input type="text" value={newPostDescription} onChange={handleNewPostDescriptionChange} />
-        </div>
-        <div>
-          <label>Compétences:</label>
-          <div className="skills-buttons">
-            {skillsList.map(skill => (
-              <button
-                key={skill}
-                onClick={() => handleSkillButtonClick(skill)}
-                className={selectedSkills.includes(skill) ? 'selected' : ''}
-              >
-                {skill}
-              </button>
-            ))}
-          </div>
-        </div>
-        <button onClick={handleAddPost}>Ajouter Post</button>
-      </div>
+      <button onClick={handleRegister}>Register</button>
 
-      <div className="posts-section">
-        <h2>Tous les posts</h2>
-        <ul>
-          {filteredPosts.map(post => (
-            <li key={post.id}>
-              <div className="post-item">
-                <div className="post-description">{post.description}</div>
-                <div className="post-skills">Compétences: {post.skills.join(', ')}</div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {registered && <Navigate to="/login" />}
     </div>
   );
 };
 
-export default Forum;
+export default App;
