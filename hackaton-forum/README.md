@@ -22,3 +22,9 @@ Ce projet vise à fournir une plateforme permettant aux élèves de demander de 
 - **Node.js :** Plateforme côté serveur pour exécuter le serveur.
 - **Express :** Cadre côté serveur pour simplifier le développement web avec Node.js.
 - **SQLite :** Système de gestion de base de données relationnelle pour stocker les données.
+
+## Auteurs
+
+- **Simon LOUIS**
+- **Enzo Achard**
+- **Luce FREDERIQUE**
