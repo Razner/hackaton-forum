@@ -43,17 +43,17 @@ const Register = () => {
     try {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        console.error('Invalid email address');
+        console.error('Addresse mail non valide');
         return;
       }
 
       if (password.length < 8) {
-        console.error('Password must be at least 8 characters long');
+        console.error('Le mot de passe doit faire 8 caractères minimum');
         return;
       }
   
       if (selectedSkills.length === 0) {
-        console.error('Select at least one skill');
+        console.error('Selectionne au moins 1 compétence');
         return;
       }
   
@@ -66,7 +66,7 @@ const Register = () => {
       console.log(response.data);
       setRegistered(true);
     } catch (error) {
-      console.error('Error during registration:', error);
+      console.error('Erreur durant l enregistrement:', error);
     }
   };  
 

@@ -17,7 +17,7 @@ const Login = () => {
       }
   
       console.log('Email:', email);
-      console.log('Password:', password);
+      console.log('Mot de passe:', password);
   
       const response = await axios.post('http://localhost:3001/login', {
         email,
@@ -28,8 +28,8 @@ const Login = () => {
   
       navigate('/forum');
     } catch (error) {
-      console.error('Error during login:', error);
-      setLoginError('Login failed. Please check your email and password.');
+      console.error('Erreur lors de la connexion:', error);
+      setLoginError('Connexion échouée. Vérifie ton mail et ton mot de passe.');
     }
   };
 
