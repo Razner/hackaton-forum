@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../css/Forum.css'; 
+import imageYnov from '../img/img.jpeg';
 
 const Forum = () => {
   const [posts, setPosts] = useState([]);
@@ -107,6 +108,9 @@ const Forum = () => {
             </li>
           ))}
         </ul>
+        <div className="img-ynov">
+          <img src={imageYnov} alt="Logo Ynov" />
+        </div>
       </div>
     </div>
   );

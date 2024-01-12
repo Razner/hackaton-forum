@@ -1,17 +1,27 @@
 /* Footer.css */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100; 
+html, body {
+  height: 100%;
+  margin: 0;
 }
-  
-  footer p {
-    margin: 0;
-  }
-  
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin-top: auto;
+}
+
+footer p {
+  margin: 0;
+}
