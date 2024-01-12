@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import axios from 'axios';
 import Login from './Login.js';
 import Forum from './Forum.js';
+import './App.css'
 
 const App = () => {
   return (
@@ -34,44 +35,61 @@ const Register = () => {
 
   const handleRegister = async () => {
     try {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        console.error('Invalid email address');
+        return;
+      }
+
+      if (password.length < 8) {
+        console.error('Password must be at least 8 characters long');
+        return;
+      }
+  
+      if (selectedSkills.length === 0) {
+        console.error('Select at least one skill');
+        return;
+      }
+  
       const response = await axios.post('http://localhost:3001/register', {
         email,
         password,
         skills: selectedSkills,
       });
-
+  
       console.log(response.data);
       setRegistered(true);
     } catch (error) {
       console.error('Error during registration:', error);
     }
-  };
+  };  
 
   return (
-    <div>
-      <h1>Register</h1>
+    <div className={'forum-container'}>
+      <h1>Hackaton Forum</h1>
       <label>Email:</label>
       <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
 
-      <label>Password:</label>
+      <label>Mot de passe:</label>
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
       <div>
-        <label>Skills:</label>
+        <label>Compétences:</label>
         {skillsList.map(skill => (
           <button
             key={skill}
             onClick={() => handleSkillButtonClick(skill)}
-            style={{ margin: '5px', padding: '5px', borderRadius: '5px', backgroundColor: selectedSkills.includes(skill) ? '#fff' : '#ccc' }}
+            className={selectedSkills.includes(skill) ? 'clicked' : ''}
           >
             {skill}
           </button>
         ))}
       </div>
 
-      <button onClick={handleRegister}>Register</button>
-
+    <div className={'register'}>
+      <button onClick={handleRegister}>S'enregistrer</button>
       {registered && <Navigate to="/login" />}
+    </div>
     </div>
   );
 };
