@@ -1,76 +1,24 @@
-# Getting Started with Create React App
+# Projet Hackaton Forum
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ce projet vise à fournir une plateforme permettant aux élèves de demander de l'aide et de collaborer sur des problèmes liés à leurs études.
 
-## Available Scripts
+## Fonctionnalités
 
-In the project directory, you can run:
+- **Enregistrement d'utilisateur :** Les élèves peuvent créer un compte avec leur adresse e-mail et un mot de passe.
+- **Demande d'aide :** Les utilisateurs peuvent soumettre des demandes d'aide pour des sujets spécifiques et des compétences demandées.
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Cloner le projet :** `git clone https://github.com/Razner/hackaton-forum.git`
+2. **Accéder au répertoire :** `cd hackaton-forum/`
+3. **Installer les dépendances :** `npm install` (react react-dom react-router-dom, react-scripts, axios, express, sqlite3, cors, bcrypt)
+4. **Lancer le serveur Node.js :** `cd src`  `node server.js`
+5. **Lancer le serveur :** `npm start/`
+6. **Accéder à l'application :** Ouvrez votre navigateur et accédez à `http://localhost:3000`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Utilisées
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-install node modules
-npm install express sqlite3 cors
-npm install react-router-dom
-npm install bcrypt
-npm install axios
+- **React :** Bibliothèque JavaScript pour la construction de l'interface utilisateur.
+- **Node.js :** Plateforme côté serveur pour exécuter le serveur.
+- **Express :** Cadre côté serveur pour simplifier le développement web avec Node.js.
+- **SQLite :** Système de gestion de base de données relationnelle pour stocker les données.
