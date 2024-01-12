@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import axios from 'axios';
 import Login from './Login.js';
 import Forum from './Forum.js';
-import Header from './header';
-import Footer from './footer';
-import './App.css';
+import Header from '../css/header.jsx';
+import Footer from '../css/footer.jsx';
+import '../css/App.css';
 
 const App = () => {
   return (

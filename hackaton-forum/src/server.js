@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const db = new sqlite3.Database('DB.sqlite', (err) => {
+const db = new sqlite3.Database('db/DB.sqlite', (err) => {
   if (err) {
     console.error('Could not connect to database:', err.message);
   } else {
