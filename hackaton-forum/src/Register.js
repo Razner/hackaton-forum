@@ -3,26 +3,21 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import axios from 'axios';
 import Login from './Login.js';
 import Forum from './Forum.js';
-import Header from './header';
-import Footer from './footer';
-import './App.css';
+import './App.css'
 
 const App = () => {
   return (
     <Router>
-      <Header/>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/forum" element={<Forum />} />
         <Route path="/" element={<Register />} />
       </Routes>
-      <Footer/>
     </Router>
   );
 };
 
 const Register = () => {
-  /*mise en place de l'API*/
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -39,7 +34,6 @@ const Register = () => {
   };
 
   const handleRegister = async () => {
-    /*tu sais le truc*/
     try {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {

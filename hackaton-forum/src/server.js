@@ -29,7 +29,7 @@ app.post('/register', (req, res) => {
 
   const saltRounds = 10;
 
-  bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
+  bcrypt.hash(password, saltRounds, (err, hashedPassword/*enzo?*/) => {
     if (err) {
       console.error('Error during password hashing:', err.message);
       res.status(500).json({ message: 'Registration failed' });
