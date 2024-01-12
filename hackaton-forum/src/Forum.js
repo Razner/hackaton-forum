@@ -22,6 +22,7 @@ const Forum = () => {
 
   const handleNewPostDescriptionChange = (e) => {
     setNewPostDescription(e.target.value);
+    /*mmh*/
   };
 
   const handleSkillButtonClick = (skill) => {
@@ -50,7 +51,7 @@ const Forum = () => {
     ? posts
     : posts.filter(post =>
       post.skills.some(skill => skill.toLowerCase().includes(selectedSkill.toLowerCase())) ||
-      (post.description && post.description.toLowerCase().includes(selectedSkill.toLowerCase()))
+      (post.description && post.description.toLowerCase(/*???*/ ).includes(selectedSkill.toLowerCase()))
     );
 
   return (

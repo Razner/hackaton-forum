@@ -22,6 +22,7 @@ const App = () => {
 };
 
 const Register = () => {
+  /*mise en place de l'API*/
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [selectedSkills, setSelectedSkills] = useState([]);
@@ -38,6 +39,7 @@ const Register = () => {
   };
 
   const handleRegister = async () => {
+    /*tu sais le truc*/
     try {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
