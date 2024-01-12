@@ -11,6 +11,11 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
+      if (!email || !password) {
+        setLoginError('Veuillez renseigner tous les champs.');
+        return;
+      }
+  
       console.log('Email:', email);
       console.log('Password:', password);
   
@@ -26,7 +31,7 @@ const Login = () => {
       console.error('Error during login:', error);
       setLoginError('Login failed. Please check your email and password.');
     }
-  };  
+  };
 
   return (
     <div className={'forum-container'}>

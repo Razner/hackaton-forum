@@ -35,18 +35,34 @@ const Register = () => {
 
   const handleRegister = async () => {
     try {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        console.error('Invalid email address');
+        return;
+      }
+
+      if (password.length < 8) {
+        console.error('Password must be at least 8 characters long');
+        return;
+      }
+  
+      if (selectedSkills.length === 0) {
+        console.error('Select at least one skill');
+        return;
+      }
+  
       const response = await axios.post('http://localhost:3001/register', {
         email,
         password,
         skills: selectedSkills,
       });
-
+  
       console.log(response.data);
       setRegistered(true);
     } catch (error) {
       console.error('Error during registration:', error);
     }
-  };
+  };  
 
   return (
     <div className={'forum-container'}>
